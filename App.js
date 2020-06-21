@@ -11,10 +11,9 @@ const cocktailService = new CocktailService();
 const Stack = createStackNavigator();
 
 export default class App extends Component{
-    
-      state = {
-        filters: ''
-      }
+    state = {
+      filters: ''
+    }
       
     setFilters = (value) => {
       this.setState({

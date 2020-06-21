@@ -21,15 +21,12 @@ export default class CocktailService{
 
     getCocktailsByMultiFilter = async(...filters) => {
         let res;
-        console.log(filters)
         filters.forEach(async filter => {
-            console.log(filter);
             let listOfDrinks = await this.getCocktailsByFilter(filter);
             listOfDrinks.then(list => {
                 res.push(list);
             })
         })
-        console.log(res)
         return res;
     }
 }

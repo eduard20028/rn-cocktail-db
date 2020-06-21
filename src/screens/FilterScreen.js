@@ -21,12 +21,12 @@ class FilterScreen extends Component{
         selected: filters ? filters : drinks,
         loading: false
       });
-    }, () => {console.log(this.state.selected)})
+    })
   }
 
   onToggleSelect = (id) => {
     const {filters, selected} = this.state;
-    console.log(selected);
+
     const selectedId = selected.findIndex(el => filters[id].strCategory === el.strCategory);
     let newSelected;
     if (selectedId !== -1) {

@@ -1,59 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { withCocktailService } from './HOC';
-import Spinner from './Spinner';
 
-class CocktailList extends Component{
-    state = {
-        cocktails: [],
-        loading: true
-    }
+const CocktailList = ({data}) => {
+    const { drinks, filter } = data;
 
-    componentDidMount() {
-        this.loadItems();
-    }
-
-    loadItems() {
-        const { getCocktailsByFilter, filter} = this.props;
-
-        getCocktailsByFilter(filter).then(({drinks}) => {
-            this.setState({
-                cocktails: drinks.slice(0, 4),
-                filter,
-                loading: false
-            })
-        })
-    }
-
-    render() {
-        const {loading, cocktails, filter} = this.state;
-
-        if(loading) return <Spinner/>
-
-        return(
-            <View>
-                <Text style={styles.filterTitle}>{filter}</Text>
-                {
-                    cocktails.map(item => (
-                        <View style={styles.itemBlock} key={item.idDrink}>
-                            <Image style={styles.itemImage} source={{uri: item.strDrinkThumb}}/>
-                            <Text style={[styles.itemText, styles.text]}>{item.strDrink}</Text>
-                        </View>
-                    ))
-                }
-            </View>
-        )
-    }
+    return(
+        <View>
+            <Text style={styles.filterTitle}>{filter}</Text>
+            {
+                drinks.map(item => (
+                    <View style={styles.itemBlock} key={item.idDrink}>
+                        <Image style={styles.itemImage} source={{uri: item.strDrinkThumb}}/>
+                        <Text style={[styles.itemText, styles.text]}>{item.strDrink}</Text>
+                    </View>
+                ))
+            }
+        </View>
+    )
 }
 
-const mapMethodsToProps = (cocktailService) => {
-    return {
-        getCocktailsByFilter: cocktailService.getCocktailsByFilter
-    }
-}
-
-export default withCocktailService(mapMethodsToProps)(CocktailList);
-
+export default CocktailList;
 
 const styles = StyleSheet.create({
     filterTitle: {

@@ -1,11 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
 
-class FilterItem extends Component{
-
-  render() {
-    const { filter, id, onToggleSelect, toggleSelect } = this.props;
-
+const FilterItem = ({ filter, id, onToggleSelect, toggleSelect }) => {
     return(
             <TouchableHighlight 
               style={styles.filter}
@@ -18,7 +14,6 @@ class FilterItem extends Component{
                 </View>
             </TouchableHighlight>
     )
-  }
 }
 
 export default FilterItem;

@@ -26,7 +26,6 @@ class FilterScreen extends Component{
 
   onToggleSelect = (id) => {
     const {filters, selected} = this.state;
-
     const selectedId = selected.findIndex(el => filters[id].strCategory === el.strCategory);
     let newSelected;
     if (selectedId !== -1) {

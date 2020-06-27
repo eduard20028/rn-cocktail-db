@@ -14,19 +14,19 @@ export default class CocktailService{
         return res;
     }
 
-    getFilters = async() => {
-        const res = await this.getResource('/list.php?c=list');
+    getCocktailsByMultiFilter = async (filters, limit) => {
+        let res = [];
+        for(let i = 0; i < filters.length; i++) { 
+            await this.getCocktailsByFilter(filters[i].strCategory).then(({drinks}) => res.push({
+                drinks: drinks.slice(0, limit),
+                filter: filters[i].strCategory
+            }));
+        }
         return res;
     }
 
-    getCocktailsByMultiFilter = async(...filters) => {
-        let res;
-        filters.forEach(async filter => {
-            let listOfDrinks = await this.getCocktailsByFilter(filter);
-            listOfDrinks.then(list => {
-                res.push(list);
-            })
-        })
+    getFilters = async() => {
+        const res = await this.getResource('/list.php?c=list');
         return res;
     }
 }
